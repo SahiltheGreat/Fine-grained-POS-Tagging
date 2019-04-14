@@ -18,7 +18,7 @@ p {
 
 /*** Calendar **********************/
 .content .container-fluid div.calender  { position: relative; }
-
+/* .page-wrap {position: relative;} */
 .container-fluid .calender  table {
 cursor:pointer;
 border:1px solid #ccc;

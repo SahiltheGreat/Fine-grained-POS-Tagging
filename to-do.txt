@@ -1,4 +1,0 @@
-1. Create all required webpages (with HTML, CSS AND JS ).
-2. Use Flask across all the pages.
-3. More focus on the experiment section ... involves taking user input through Flask and validating it.
-4. Deploying the application online ( on Cloud platforms like Heroku app ).
