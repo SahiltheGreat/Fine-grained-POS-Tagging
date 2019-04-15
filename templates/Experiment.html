@@ -32,13 +32,16 @@
       $("#btn").click(function(){
         $.ajax({
           data : {
-             sentence : $('#val option:selected').text(),
+             sentence : $('#val option:selected').text().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""),
                  },
              type : 'POST',
              url : '/Experiment/pos-eng'
             })
         .done(function(data) {
           $('#output').text(data.output).show();
+		  $('#sentable').show();
+          $('#p1').show();
+          $('#p2').show();
       });
       event.preventDefault();
       });
@@ -56,6 +59,9 @@
             })
         .done(function(data) {
           $('#output').text(data.output).show();
+		  $('#sentable').show();
+          $('#p1').show();
+          $('#p2').show();
       });
       event.preventDefault();
       });
@@ -83,6 +89,63 @@
   }
   
   </script>
+  <script>
+		function splitstring(){
+			var lan = document.getElementById("level");
+			var sel = lan.options[lan.selectedIndex].text;
+			if(sel == "English")
+			{
+				var e = document.getElementById("val");
+			}
+			else if (sel == "Hindi")
+			{
+				var e = document.getElementById("hinval");
+			}
+		  var selected = e.options[e.selectedIndex].text;
+		  var res = selected.split(" ");
+		  var tably = document.getElementById("sentable");
+		  // console.log(res[i]);
+			tably.innerHTML=" ";
+			for (var i=0; i<res.length; i++) {
+			var dropdown ="<select id="+i+">"+
+       " <option value='CC'>CC</option>"+
+       " <option value='CD'>CD</option>"+
+      "  <option value='DT'>DT</option>"+
+     "   <option value='EX'>EX</option>"+
+    "    <option value='IN'>IN</option>"+
+   "     <option value='JJ'>JJ</option>"+
+  "      <option value='JJR'>JJR</option>"+
+ "       <option value='JJS'>JJS</option>"+
+       " <option value='MD'>MD</option>"+
+      "  <option value='NN'>NN</option>"+
+     "   <option value='NNS'>NNS</option>"+
+    "    <option value='NNPS'>NNPS</option>"+
+   "     <option value='PDT'>PDT</option>"+
+  "      <option value='POS'>POS</option>"+
+  "      <option value='PRP'>PRP</option>"+
+      "  <option value='PRP$'>PRP$</option>"+
+     "   <option value='RB'>RB</option>"+
+    "    <option value='RBR'>RBR</option>"+
+   "     <option value='RBS'>RBS</option>"+
+  "      <option value='TO'>TO</option>"+
+ "       <option value='UH'>UH</option>"+
+"        <option value='VB'>VB</option>"+
+       " <option value='VBD'>VBD</option>"+
+        "<option value='VBG'>VBG</option>"+
+       " <option value='VBN'>VBN</option>"+
+      "  <option value='VBP'>VBP</option>"+
+     "   <option value='VBZ'>VBZ</option>"+
+    "    <option value='WDT'>WDT</option>"+
+   "     <option value='WP'>WP</option>"+
+  "      <option value='WP$'>WP$</option>"+
+ "       <option value='WRB'>WRB</option>"+
+"</select>";
+			tably.innerHTML+="<tr><td>"+res[i]+"</td><td>"+dropdown+"</td></tr>";
+		  // tably.innerHTML="<tr><td>" + i + ":</td><td>" + res[i] + "</td></tr>";
+		  }
+		// }
+		}
+		</script>
 <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-67558473-1', 'auto');ga('send', 'pageview');</script>	
 </head>
 <body id="page-top" class="index">
@@ -157,13 +220,16 @@
 						<div class="col-md-10 lab-list-col-10">
 							
 							<!--edit -->
-<h1 class="text-h2-lightblue">Fine - grained POS Tagging</h1><div class="content" id="experiment-article-section-4-content">
-<div id="POS_TAG_1"></div>
-</div>						</div>
+<h1 class="text-h2-lightblue">Fine - grained POS Tagging</h1><div class="content " id="experiment-article-section-4-content">
+<!--<div id="POS_TAG_1"></div>-->
+<!--</div> class content					
+						</div>
 					</div>
-			</div>
+			</div>-->
+<!--			 <div class="col-md-10 lab-list-col-10"> -->
+
 			<select id="level" onchange="Languagesel()">
-					<option selected value="base">---Please select a language--</option>  
+					<option selected value="base" disabled>---Please select a language--</option>  
 					<option value="Eng">English</option>
 					<option value="Hin">Hindi</option>
 				</select>
@@ -172,7 +238,7 @@
 			  <div id="page-wrap" >
 				<h1>POS tagging of the statements</h1>
 				<select id="val" style="display:none">
-							<option selected value="base">---Please select a sentence---</option>
+							<option selected value="base" disabled>---Please select a sentence---</option>
 							<option value="1">There were once a man and a woman who had long, in vain, wished for a child.</option>
 							<option value="2">At length it appeared that God was about to grant their desire. </option>
 							<option value="3">These people had a little window at the back of their house from which a splendid garden could be seen.</option>
@@ -185,8 +251,8 @@
 							<option value="10">'Ah,' she replied, 'if I cannot eat some of the rampion, which is in the garden behind our house, I shall die.' </option>
 			
 				</select>
-				<select id="hinval" style="display:none">
-							<option selected value="base">---कृपया दिए गए वाक्यों में से एक चुनिए ।---</option>
+				<select id="hinval" style="display:none" >
+							<option selected value="base" disabled>---कृपया दिए गए वाक्यों में से एक चुनिए ।---</option>
 							<option value="1">राम सीता के लिए फूलों की माला बनाता है।</option>
 							<option value="2">सभी बच्चे विद्यालय में पढ़ते है। </option>
 							<option value="3">मैंने उनसे एक सहज प्रश्न पूछा था। </option>
@@ -200,13 +266,18 @@
 			  </div>
 			  <br>
 			  <br>
-			  <button type="submit" id="btn" style="display:none">Get Solutions</button>
+			  <button type="submit" id="btn" style="display:none" onclick="splitstring()">Get Solutions</button>
 			</form>
-			</br>
+			<br>
+			<p id="p1" style="color:blue ;  display: none"><i>Select from the options below</i></p>
+			<table id="sentable" style="display:none" border="solid black" > </table>
+			<br>
+			<br>
+			<p id="p2" style="display:none"><b>The POS tagging gives the result below:</b></p>
+			<br>
 			<div id="output"></div>
 			</br>
-			
-
+			</div></div></div></div>	
 			
 	</div> <!-- content div -->
 		

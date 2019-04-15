@@ -4,7 +4,7 @@
 
   <script>
       $(document).ready(function() {
-      $("#val").change(function(){
+      $("#btn").click(function(){
         $.ajax({
           data : {
              sentence : $('#val option:selected').text(),
@@ -14,6 +14,11 @@
             })
         .done(function(data) {
           $('#output').text(data.output).show();
+          $('#sentable').show();
+          $('#p1').show();
+          $('#p2').show();
+
+
       });
       event.preventDefault();
       });
@@ -21,7 +26,7 @@
   </script>
    <script>
       $(document).ready(function() {
-      $("#hinval").change(function(){
+      $("#btn").click(function(){
         $.ajax({
           data : {
              pankti : $('#hinval option:selected').text(),
@@ -31,6 +36,11 @@
             })
         .done(function(data) {
           $('#output').text(data.output).show();
+          $('#sentable').show();
+          $('#p1').show();
+          $('#p2').show();
+
+
       });
       event.preventDefault();
       });
@@ -62,6 +72,15 @@
   function splitstring(){
     var e = document.getElementById("val");
     var selected = e.options[e.selectedIndex].text;
+    var res = selected.split(" ");
+    var tably = document.getElementById("sentable");
+    // console.log(res[i]);
+      tably.innerHTML=" ";
+      for (var i=0; i<res.length; i++) {
+      tably.innerHTML+="<tr><td>"+res[i]+"</td><td>"+"india"+"</td></tr>";
+    // tably.innerHTML="<tr><td>" + i + ":</td><td>" + res[i] + "</td></tr>";
+    }
+  // }
   }
   </script>
 
@@ -106,9 +125,15 @@
   </div>
   <br>
   <br>
-  <button type="submit" id="btn" style="display:none">Submit</button>
+  <button type="submit" id="btn" style="display:none" onclick="splitstring()">Submit</button>
 </form>
-</br>
+<br>
+<p id="p1" style="color:blue ;  display: none"><i>Select from the options below</i></p>
+<table id="sentable" style="display:none" border="solid black" > </table>
+<br>
+<br>
+<p id="p2" style="display:none"><b>The POS tagging gives the result below:</b></p>
+<br>
 <div id="output"></div>
 </br>
 </body>
