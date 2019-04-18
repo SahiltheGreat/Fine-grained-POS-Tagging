@@ -13,7 +13,12 @@ contentArray = ['There were once a man and a woman who had long, in vain, wished
                 'One day the woman was standing by this window and looking down into the garden. ',
                 'She saw a bed which was planted with the most beautiful rampion, and she longed for it.',
                 'Her husband was alarmed, and asked "What ails you, dear wife?" ',
-                '\'Ah,\' she replied, \'if I cannot eat some of the rampion, which is in the garden behind our house, I shall die.\' ']  
+                '\'Ah,\' she replied, \'if I cannot eat some of the rampion, which is in the garden behind our house, I shall die.\' ',
+                'What is your name?',
+                'John is the best singer I have ever seen',
+                'We should avoid travelling in the night',
+                'Ram ate an apple which was on the table',
+                'The dog is sitting just at the front side of the gate']  
                     
 def processContent():
     try:

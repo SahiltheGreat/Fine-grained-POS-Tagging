@@ -68,7 +68,7 @@
 		});
 	  });
 	</script>
-	<script>
+	<!--<script>
   function dispfunc()
   {
       var chosen = document.querySelector('input[name = "sen"]:checked').value;
@@ -82,14 +82,22 @@
 		sendrop.innerHTML+="<select><option value="+res[i]+">"+res[i]+"</option>";
 	  }
 	  sendrop.innerHTML+="</select>"
+	  document.getElementById("continuequiz").style.display="initial";
 	  document.getElementById("sentencehere").style.display="initial";
 	  document.getElementById("postag").style.display="initial";
       document.getElementById("btn").style.display="initial";
-	  document.getElementById("getbtn").style.display="initial";
 
   }
   
-  </script>
+  </script>-->
+  <!--
+  <script>
+  function getdisp()
+  {
+	document.getElementById("getbtn").style.display="initial";
+  }
+  
+  </script>-->
 	
 <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-67558473-1', 'auto');ga('send', 'pageview');</script>	
 </head>
@@ -174,13 +182,15 @@ Select one of the following sentences and give the fine-grained POS tag for the 
 <input type="radio" name="sen"value="Ram ate an apple which was on the table"> Ram ate an apple which was on the table.<br>
 <input type="radio" name="sen" value="The dog is sitting just at the front side of the gate"> The dog is sitting just at the front side of the gate.<br>
 <br/><br/>
+<p style="color:red">The app currently does not support Hindi language. Work is under progress </p>
 <input type="radio" name="sen" value="नाम क्या है तुम्हारा"> नाम क्या है तुम्हारा ?<br>
 <input type="radio" name="sen" value="राम जैसा अच्छा गायक मैंने आज तक नहीं देखा"> राम जैसा अच्छा गायक मैंने आज तक नहीं देखा<br>
 <input type="radio" name="sen" value="रात के समय यात्रा न करने की कोशीश करनी चाहिए"> रात के समय यात्रा न करने की कोशीश करनी चाहिए<br>
 <input type="radio" name="sen" value="राम ने वह सेब खाया हो मेज पर रखा हुआ था"> राम ने वह सेब खाया हो मेज पर रखा हुआ था<br>
 <input type="radio" name="sen" value="यह वक्त पढाई का नहीं बल्कि सोने का होता है"> यह वक्त पढाई का नहीं बल्कि सोने का होता है<br>
-<button id="okbtn" onclick="dispfunc()">Ok?</button>
+<button id="okbtn" onclick="dispfunc()">Click to Continue</button>
 <br><br>
+<p id ="continuequiz" style="display:none"><i>Choose any word belonging to the sentence and its corresponding POS tag in the dropdowns below.</i></p>
 <form class = "quizform">
 <select id="sentencehere" style="display:none">
 </select>
@@ -198,7 +208,8 @@ Select one of the following sentences and give the fine-grained POS tag for the 
 	<option value="MD">MD</option>
 	<option value="NN">NN</option>
 	<option value="NNS">NNS</option>
-	<option value="NNPS">NNPS</option>
+	<option value="NNP">NNP</option>
+	<option value='NNPS'>NNPS</option>
 	<option value="PDT">PDT</option>
 	<option value="POS">POS</option>
 	<option value="PRP">PRP</option>
@@ -206,6 +217,7 @@ Select one of the following sentences and give the fine-grained POS tag for the 
 	<option value="RB">RB</option>
 	<option value="RBR">RBR</option>
 	<option value="RBS">RBS</option>
+	<option value='RP'>RP</option>
 	<option value="TO">TO</option>
 	<option value="UH">UH</option>
 	<option value="VB">VB</option>
@@ -222,7 +234,7 @@ Select one of the following sentences and give the fine-grained POS tag for the 
 </form>
 <br><br>
 
-<button id="btn" style="display:none">Submit</button>
+<button id="btn" style="display:none" onclick="getdisp()">Submit your response</button>
 <br>
 <p id="output"></p>
 <br>
@@ -286,6 +298,9 @@ Select one of the following sentences and give the fine-grained POS tag for the 
 
 	<!-- jQuery -->
     <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='js/dispfunc.js')}}"></script>
+    <script src="{{url_for('static', filename='js/getdisp.js')}}"></script>
+	
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>

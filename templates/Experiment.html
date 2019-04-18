@@ -67,85 +67,310 @@
       });
     });
   </script>
-<script>
-  function Languagesel()
-  {
-      var e = document.getElementById("level");
-      var selected = e.options[e.selectedIndex].text;
-      console.log(selected);
-      
-      if (selected == "English"){
-        document.getElementById("val").style.display = "initial";
-        document.getElementById("hinval").style.display = "none";
-
-
-      }
-      else if(selected == "Hindi"){
-        document.getElementById("hinval").style.display = "initial";
-        document.getElementById("val").style.display = "none";
-
-      }
-      document.getElementById("btn").style.display="initial";
-  }
-  
-  </script>
   <script>
-		function splitstring(){
-			var lan = document.getElementById("level");
-			var sel = lan.options[lan.selectedIndex].text;
-			if(sel == "English")
+	$(document).ready(function() {
+	$("#subtn").click(function(){
+		var arr = [];
+$("#sentable tr").each(function(){
+    arr.push($(this).find("td:first").text());
+	}) ,//put elements into array
+console.log(arr[1]);
+	  $.ajax({
+		data : {
+		   word0 : arr[0],
+		   word1 :arr[1],
+		   word2 :arr[2],
+		   word3 :arr[3],
+		   word4 :arr[4],
+		   word5 :arr[5],
+		   word6 :arr[6],
+		   word7 :arr[7],
+		   word8 :arr[8],
+		   word9 :arr[9],
+		   word10:arr[10],
+		   word11 :arr[11],
+		   word12 :arr[12],
+		   word13 :arr[13],
+		   word14 :arr[14],
+		   word15 :arr[15],
+		   word16 :arr[16],
+		   word17 :arr[17],
+		   word18 :arr[18],
+		   word19 :arr[19],
+		   word20 :arr[20],
+		   word21 :arr[21],
+		   word22 :arr[22],
+		   pos0: $('#0 option:selected').text(),   
+		   pos1: $('#1 option:selected').text(),   
+		   pos2: $('#2 option:selected').text(),   
+		   pos3: $('#3 option:selected').text(),   
+		   pos4: $('#4 option:selected').text(),   
+		   pos5: $('#5 option:selected').text(),   
+		   pos6: $('#6 option:selected').text(),   
+		   pos7: $('#7 option:selected').text(),   
+		   pos8: $('#8 option:selected').text(),   
+		   pos9: $('#9 option:selected').text(),   
+		   pos10: $('#10 option:selected').text(),   
+		   pos11: $('#11 option:selected').text(),   
+		   pos12: $('#12 option:selected').text(),   
+		   pos13: $('#13 option:selected').text(),   
+		   pos14: $('#14 option:selected').text(),  
+		   pos15: $('#15 option:selected').text(),   
+		   pos16: $('#16 option:selected').text(),   
+		   pos17: $('#17 option:selected').text(),   
+		   pos18: $('#18 option:selected').text(),   
+		   pos19: $('#19 option:selected').text(),   
+		   pos20: $('#20 option:selected').text(),   
+		   pos21: $('#21 option:selected').text(),   
+		   pos22: $('#22 option:selected').text(),      
+
+			   },
+		   type : 'POST',
+		   url : '/Experiment/validate'
+		  })
+	  .done(function(data) {
+		if(data.ans0 == "Correct")
 			{
-				var e = document.getElementById("val");
+				// $('#ans0').text(data.ans0).css("color","green").show();
+				$("#im0").attr("src","../static/images/sahi.png").show();
 			}
-			else if (sel == "Hindi")
+		if(data.ans0 == "Incorrect")
+		{
+			// $('#ans0').text(data.ans0).css("color","red").show();
+			$("#im0").attr("src","../static/images/galat.png").show();
+
+  		}
+		  if(data.ans1 == "Correct")
 			{
-				var e = document.getElementById("hinval");
+				// $('#ans1').text(data.ans1).css("color","green").show();
+				$("#im1").attr("src","../static/images/sahi.png").show();
+
 			}
-		  var selected = e.options[e.selectedIndex].text;
-		  var res = selected.split(" ");
-		  var tably = document.getElementById("sentable");
-		  // console.log(res[i]);
-			tably.innerHTML=" ";
-			for (var i=0; i<res.length; i++) {
-			var dropdown ="<select id="+i+">"+
-       " <option value='CC'>CC</option>"+
-       " <option value='CD'>CD</option>"+
-      "  <option value='DT'>DT</option>"+
-     "   <option value='EX'>EX</option>"+
-    "    <option value='IN'>IN</option>"+
-   "     <option value='JJ'>JJ</option>"+
-  "      <option value='JJR'>JJR</option>"+
- "       <option value='JJS'>JJS</option>"+
-       " <option value='MD'>MD</option>"+
-      "  <option value='NN'>NN</option>"+
-     "   <option value='NNS'>NNS</option>"+
-    "    <option value='NNPS'>NNPS</option>"+
-   "     <option value='PDT'>PDT</option>"+
-  "      <option value='POS'>POS</option>"+
-  "      <option value='PRP'>PRP</option>"+
-      "  <option value='PRP$'>PRP$</option>"+
-     "   <option value='RB'>RB</option>"+
-    "    <option value='RBR'>RBR</option>"+
-   "     <option value='RBS'>RBS</option>"+
-  "      <option value='TO'>TO</option>"+
- "       <option value='UH'>UH</option>"+
-"        <option value='VB'>VB</option>"+
-       " <option value='VBD'>VBD</option>"+
-        "<option value='VBG'>VBG</option>"+
-       " <option value='VBN'>VBN</option>"+
-      "  <option value='VBP'>VBP</option>"+
-     "   <option value='VBZ'>VBZ</option>"+
-    "    <option value='WDT'>WDT</option>"+
-   "     <option value='WP'>WP</option>"+
-  "      <option value='WP$'>WP$</option>"+
- "       <option value='WRB'>WRB</option>"+
-"</select>";
-			tably.innerHTML+="<tr><td>"+res[i]+"</td><td>"+dropdown+"</td></tr>";
-		  // tably.innerHTML="<tr><td>" + i + ":</td><td>" + res[i] + "</td></tr>";
-		  }
-		// }
-		}
-		</script>
+		if(data.ans1 == "Incorrect")
+		{
+			// $('#ans1').text(data.ans1).css("color","red").show();
+			$("#im1").attr("src","../static/images/galat.png").show();
+
+  		}
+		  if(data.ans2 == "Correct")
+			{
+				//$('#ans2').text(data.ans2).css("color","green").show();
+				$("#im2").attr("src","../static/images/sahi.png").show();
+
+			}
+		if(data.ans2 == "Incorrect")
+		{
+			$("#im2").attr("src","../static/images/galat.png").show();
+			//$('#ans2').text(data.ans2).css("color","red").show();
+  		}
+		  if(data.ans3 == "Correct")
+			{
+				$("#im3").attr("src","../static/images/sahi.png").show();
+			//	$('#ans3').text(data.ans3).css("color","green").show();
+			}
+		if(data.ans3 == "Incorrect")
+		{
+			$("#im3").attr("src","../static/images/galat.png").show();
+			//	$('#ans3').text(data.ans3).css("color","red").show();
+  		}
+		  if(data.ans4 == "Correct")
+			{
+				$("#im4").attr("src","../static/images/sahi.png").show();
+			//	$('#ans4').text(data.ans4).css("color","green").show();
+			}
+		if(data.ans4 == "Incorrect")
+		{
+			$("#im4").attr("src","../static/images/galat.png").show();
+			//$('#ans4').text(data.ans4).css("color","red").show();
+  		}
+		  if(data.ans5 == "Correct")
+			{
+				$("#im5").attr("src","../static/images/sahi.png").show();
+			//	$('#ans5').text(data.ans5).css("color","green").show();
+			}
+		if(data.ans5 == "Incorrect")
+		{
+			$("#im5").attr("src","../static/images/galat.png").show();
+			//$('#ans5').text(data.ans5).css("color","red").show();
+  		}
+		  if(data.ans6 == "Correct")
+			{
+				$("#im6").attr("src","../static/images/sahi.png").show();
+			//	$('#ans6').text(data.ans6).css("color","green").show();
+			}
+		if(data.ans6 == "Incorrect")
+		{
+			$("#im6").attr("src","../static/images/galat.png").show();
+			//$('#ans6').text(data.ans6).css("color","red").show();
+  		}
+		  if(data.ans7 == "Correct")
+			{
+				$("#im7").attr("src","../static/images/sahi.png").show();
+				//$('#ans7').text(data.ans7).css("color","green").show();
+			}
+		if(data.ans7 == "Incorrect")
+		{
+			$("#im7").attr("src","../static/images/galat.png").show();
+			//$('#ans7').text(data.ans7).css("color","red").show();
+  		}
+		  if(data.ans8 == "Correct")
+			{
+				$("#im8").attr("src","../static/images/sahi.png").show();
+				//$('#ans8').text(data.ans8).css("color","green").show();
+			}
+		if(data.ans8 == "Incorrect")
+		{
+			$("#im8").attr("src","../static/images/galat.png").show();
+			//$('#ans8').text(data.ans8).css("color","red").show();
+  		}
+		  if(data.ans9 == "Correct")
+			{
+				$("#im9").attr("src","../static/images/sahi.png").show();
+				//$('#ans9').text(data.ans9).css("color","green").show();
+			}
+		if(data.ans9 == "Incorrect")
+		{
+			$("#im9").attr("src","../static/images/galat.png").show();
+			//$('#ans9').text(data.ans9).css("color","red").show();
+  		}
+		  if(data.ans10 == "Correct")
+			{
+				$("#im10").attr("src","../static/images/sahi.png").show();
+				//$('#ans10').text(data.ans10).css("color","green").show();
+			}
+		if(data.ans10 == "Incorrect")
+		{
+			$("#im10").attr("src","../static/images/galat.png").show();
+		//	$('#ans10').text(data.ans10).css("color","red").show();
+  		}
+		  if(data.ans11 == "Correct")
+			{
+				$("#im11").attr("src","../static/images/sahi.png").show();		
+				//$('#ans11').text(data.ans11).css("color","green").show();
+			}
+		if(data.ans11 == "Incorrect")
+		{
+			$("#im11").attr("src","../static/images/galat.png").show();
+			//$('#ans11').text(data.ans11).css("color","red").show();
+  		}
+		  if(data.ans12 == "Correct")
+			{
+				$("#im12").attr("src","../static/images/sahi.png").show();
+				//$('#ans12').text(data.ans12).css("color","green").show();
+			}
+		if(data.ans12 == "Incorrect")
+		{
+			$("#im12").attr("src","../static/images/galat.png").show();
+			//$('#ans12').text(data.ans12).css("color","red").show();
+  		}
+		  if(data.ans13 == "Correct")
+			{
+				$("#im13").attr("src","../static/images/sahi.png").show();
+				//$('#ans13').text(data.ans13).css("color","green").show();
+			}
+		if(data.ans13 == "Incorrect")
+		{
+			$("#im13").attr("src","../static/images/galat.png").show();
+			//$('#ans13').text(data.ans13).css("color","red").show();
+  		}
+		  if(data.ans14 == "Correct")
+			{
+				$("#im14").attr("src","../static/images/sahi.png").show();
+				//$('#ans14').text(data.ans14).css("color","green").show();
+			}
+		if(data.ans14 == "Incorrect")
+		{
+			$("#im14").attr("src","../static/images/galat.png").show();
+			//$('#ans14').text(data.ans14).css("color","red").show();
+  		}
+		  if(data.ans15 == "Correct")
+			{
+				$("#im15").attr("src","../static/images/sahi.png").show();
+				//$('#ans15').text(data.ans15).css("color","green").show();
+			}
+		if(data.ans15 == "Incorrect")
+		{
+			$("#im15").attr("src","../static/images/galat.png").show();
+			//	$('#ans15').text(data.ans15).css("color","red").show();
+  		}
+		if(data.ans16 == "Correct")
+			{
+				$("#im16").attr("src","../static/images/sahi.png").show();
+				//$('#ans16').text(data.ans16).css("color","green").show();
+			}
+		if(data.ans16 == "Incorrect")
+		{
+			$("#im16").attr("src","../static/images/galat.png").show();
+			//$('#ans16').text(data.ans16).css("color","red").show();
+  		}if(data.ans17 == "Correct")
+			{
+				$("#im17").attr("src","../static/images/sahi.png").show();
+				//$('#ans17').text(data.ans17).css("color","green").show();
+			}
+		if(data.ans17 == "Incorrect")
+		{
+			$("#im17").attr("src","../static/images/galat.png").show();
+			//$('#ans17').text(data.ans17).css("color","red").show();
+  		}
+		  if(data.ans18 == "Correct")
+			{
+				$("#im18").attr("src","../static/images/sahi.png").show();
+				//$('#ans18').text(data.ans18).css("color","green").show();
+			}
+		if(data.ans18 == "Incorrect")
+		{
+			$("#im18").attr("src","../static/images/galat.png").show();
+			//$('#ans18').text(data.ans18).css("color","red").show();
+  		}
+		  if(data.ans19 == "Correct")
+			{
+				$("#im19").attr("src","../static/images/sahi.png").show();
+				//$('#ans19').text(data.ans19).css("color","green").show();
+			}
+		if(data.ans19 == "Incorrect")
+		{
+			$("#im19").attr("src","../static/images/galat.png").show();
+		//('#ans19').text(data.ans19).css("color","red").show();
+  		}
+		  if(data.ans20 == "Correct")
+			{
+				$("#im20").attr("src","../static/images/sahi.png").show();
+				//'#ans20').text(data.ans20).css("color","green").show();
+			}
+		if(data.ans20 == "Incorrect")
+		{
+			$("#im20").attr("src","../static/images/galat.png").show();
+			//$('#ans20').text(data.ans20).css("color","red").show();
+  		}
+		  if(data.ans21 == "Correct")
+			{
+				$("#im21").attr("src","../static/images/sahi.png").show();
+				//$('#ans21').text(data.ans21).css("color","green").show();
+			}
+		if(data.ans21 == "Incorrect")
+		{
+			$("#im21").attr("src","../static/images/galat.png").show();
+			//$('#ans21').text(data.ans21).css("color","red").show();
+  		}
+		  if(data.ans22 == "Correct")
+			{
+				$("#im22").attr("src","../static/images/sahi.png").show();
+				//$('#ans22').text(data.ans22).css("color","green").show();
+			}
+		if(data.ans22 == "Incorrect")
+		{
+			$("#im22").attr("src","../static/images/galat.png").show();
+			//$('#ans22').text(data.ans22).css("color","red").show();
+  		}
+
+
+
+	});
+});
+	event.preventDefault();
+	});
+</script>
+
 <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-67558473-1', 'auto');ga('send', 'pageview');</script>	
 </head>
 <body id="page-top" class="index">
@@ -233,10 +458,11 @@
 					<option value="Eng">English</option>
 					<option value="Hin">Hindi</option>
 				</select>
+				<p style="color:red">This app currently doesn't support Hindi language. Work is under progress.</p>
 			  <form class="form-inline" >
 			
 			  <div id="page-wrap" >
-				<h1>POS tagging of the statements</h1>
+				<!-- <h1>POS tagging of the statements</h1> -->
 				<select id="val" style="display:none">
 							<option selected value="base" disabled>---Please select a sentence---</option>
 							<option value="1">There were once a man and a woman who had long, in vain, wished for a child.</option>
@@ -248,7 +474,7 @@
 							<option value="7">One day the woman was standing by this window and looking down into the garden. </option>
 							<option value="8">She saw a bed which was planted with the most beautiful rampion, and she longed for it.</option>
 							<option value="9">Her husband was alarmed, and asked 'What ails you, dear wife?' </option>
-							<option value="10">'Ah,' she replied, 'if I cannot eat some of the rampion, which is in the garden behind our house, I shall die.' </option>
+							<option value="10">'Ah,' she replied, 'if I can not eat some of the rampion, which is in the garden behind our house, I shall die.' </option>
 			
 				</select>
 				<select id="hinval" style="display:none" >
@@ -266,13 +492,15 @@
 			  </div>
 			  <br>
 			  <br>
-			  <button type="submit" id="btn" style="display:none" onclick="splitstring()">Get Solutions</button>
+			  <button type="submit" id="btn" style="display:none" onclick="splitstring()">Get Started !</button>
 			</form>
 			<br>
 			<p id="p1" style="color:blue ;  display: none"><i>Select from the options below</i></p>
 			<table id="sentable" style="display:none" border="solid black" > </table>
 			<br>
 			<br>
+			<button id="subtn" style="display:none">Submit your responses</button>
+			<br><br>
 			<p id="p2" style="display:none"><b>The POS tagging gives the result below:</b></p>
 			<br>
 			<div id="output"></div>
@@ -330,7 +558,11 @@
 
 	<!-- jQuery -->
 	<script src="{{url_for('static', filename='js/jquery.js')}}"></script>
-    
+
+    <script src="{{url_for('static', filename='js/languagesel.js')}}"></script>
+	<script src="{{url_for('static', filename='js/splitstring.js')}}"></script>
+	
+
     <!-- Bootstrap Core JavaScript -->
     <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
 
