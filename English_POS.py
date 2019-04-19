@@ -28,12 +28,6 @@ def processContent():
             
 
             print(tagged)
-            # chunkGram = r"""Chunk: {<RB.?>*<VB.?>*<NNP>}"""
-            # chunkParser = nltk.RegexpParser(chunkGram)
-
-            # chunked = chunkParser.parse(tagged)
-            # print(chunked)
-            #chunked.draw()
             
     except Exception as e:
         print(str(e))

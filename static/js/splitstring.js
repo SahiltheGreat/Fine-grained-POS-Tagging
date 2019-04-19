@@ -1,3 +1,4 @@
+// This function splits the sentence into the individual words and displays them in the table
 function splitstring(){
                         document.getElementById("subtn").style.display="initial";
                         var lan = document.getElementById("level");
@@ -53,7 +54,7 @@ function splitstring(){
  "       <option value='WRB'>WRB</option>"+
 "</select>";
                         // tably.innerHTML+="<tr><td>"+res[i]+"</td><td>"+dropdown+"</td><td id=ans"+i+">"+"</td></tr>";
-                        tably.innerHTML+="<tr><td>"+res[i]+"</td><td>"+dropdown+"</td><td>"+"<img id=im"+i+">"+"</td></tr>";
+                        tably.innerHTML+="<tr><td>"+res[i]+"</td><td>"+dropdown+"</td><td>"+"<img id=im"+i+">"+"</td><td id=k"+i+">"+"</td></tr>";
                   }
 
                   for(i=res.length;i<=22;i++)
@@ -95,7 +96,7 @@ function splitstring(){
  "       <option value='WRB'>WRB</option>"+
 "</select>";
                   
-        tably.innerHTML+="<tr style='display:none'><td>"+"and"+"</td><td>"+dropdown+"</td><td id=im"+i+">"+"</td></tr>";
+        tably.innerHTML+="<tr style='display:none'><td>"+"and"+"</td><td>"+dropdown+"</td><td id=im"+i+">"+"</td><td id=k"+i+">"+"</td></tr>";
 
                   
                   }

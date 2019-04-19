@@ -1,3 +1,4 @@
+  // This function is responsible for the user's input language selection
   function Languagesel()
   {
       var e = document.getElementById("level");
